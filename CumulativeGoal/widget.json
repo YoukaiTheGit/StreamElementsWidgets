@@ -2,32 +2,37 @@
   "goal": {
     "type": "number",
     "label": "Points goal",
-    "value": 3000
+    "value": 100
+  },
+  "goals": {
+    "type": "text",
+    "label": "Points goals",
+      "value": "10:Tweet;25:Whipped Cream;50:Duolingo;75:Butts!;100:Lore;125:Q&A;150:Dog Food;175:Crane Game;200:Twister;250:Hot Tub;300:Spice;350:Cosplay;400:Alien;450:Boy Smell;500:Art;600:Fanfic ASMR;700:Chicken Nuggets;800:Chibi Model;900:Bad Dragon;1000:+24 Hours"
   },
   "pointsPerFollow": {
     "type": "number",
     "label": "Points per Follow",
-    "value": 3
+    "value": 0
   },
   "pointsPerSub": {
     "type": "number",
     "label": "Points per sub",
-    "value": 6
+    "value": 1
   },
   "pointsPerTip": {
     "type": "number",
     "label": "Points per 1 currency",
-    "value": 1
+    "value": 0.2
   },
   "pointsPerBit": {
     "type": "number",
-    "label": "Points per Bit",
-    "value": 0.01
+    "label": "Points per 100 Bits",
+    "value": 0.2
   },
   "pointsPerCounter": {
     "type": "number",
     "label": "Points per counter amount",
-    "value": 0.01
+    "value": 0
   },
   "botCounterName": {
     "type": "text",
@@ -42,27 +47,32 @@
   "backgroundColor": {
     "type": "colorpicker",
     "label": "Background color",
-    "value": "rgb(55, 55, 55)"
+    "value": "rgb(255, 167, 246)"
+  },
+  "borderColor": {
+    "type": "colorpicker",
+    "label": "Outline color",
+    "value": "rgb(214, 0, 0)"
   },
   "barColor1": {
     "type": "colorpicker",
     "label": "Bar color",
-    "value": "rgb(63, 63, 195)"
+    "value": "rgb(254, 191, 191)"
   },
   "barColor2": {
     "type": "colorpicker",
     "label": "Bar color 2",
-    "value": "rgb(63, 191, 194)"
+    "value": "hsl(57, 100%, 71%)"
   },
   "labelColor": {
     "type": "colorpicker",
     "label": "Label font color",
-    "value": "rgb(255, 255, 255)"
+    "value": "rgb(143, 0, 0)"
   },
   "labelSize": {
     "type": "number",
     "label": "Label font Size",
-    "value": 24
+    "value": 45
   },
   "labelStroke": {
     "type": "number",
