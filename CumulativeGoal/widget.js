@@ -80,11 +80,11 @@ function updateBar(amount) {
     
     console.log(`bracket: ${prevGoal.points} - ${nextGoal.points}`);
     
-    let percentage = PG_X + (amount-prevGoal.points) / (nextGoal.points - prevGoal.points) * (NG_X-PG_X);
-    console.log(`Percentage = ${percentage}`);
-    let leftEdge = (ngIndex == 0) ? PG_X : 0;
-    $("#bar").css('left', `${leftEdge}%`);
-    $("#bar").css('width', Math.min(100, percentage) - leftEdge + "%");
+    let rightEdge = PG_X + (amount-prevGoal.points) / (nextGoal.points - prevGoal.points) * (NG_X-PG_X);
+    let width = (ngIndex == 0) ? (rightEdge - PG_X) : 100;
+    console.log(`progress bar: ${rightEdge}`);
+    $("#bar").css('right', `${100 - rightEdge}%`);
+    $("#bar").css('width', width + "%");
     $("#points").html(Math.floor(amount));
     
     $("#goal_1").text(prevGoal.name);

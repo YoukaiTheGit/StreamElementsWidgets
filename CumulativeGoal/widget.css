@@ -28,7 +28,7 @@
 }
 
 span.progress {
-    left: 0px;
+    right: 0px;
     /* url("https://cdn-icons-png.flaticon.com/512/854/854676.png"),  */
     background-image: linear-gradient({{barColor1}}, {{barColor2}}); */
     background-repeat: repeat-x;
