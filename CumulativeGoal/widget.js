@@ -66,22 +66,31 @@ function nextGoalIndex(amount) {
     return goals.length-1;
 }
 
+// Returns the goal object prior to the one indicated by the index.
+function getPreviousGoal(goalIndex) {
+    return (goalIndex == 0) ? {points: 0, name: "Start!"} : goals[goalIndex-1];
+}
+
+function barParameters(goal1, goal2, amount) {
+    // Coordinate system in terms of bar percentages.
+    const PG_X = 20;
+    const NG_X = 90;
+    let rightEdge = PG_X + (amount-goal1.points) / (goal2.points - goal1.points) * (NG_X-PG_X);
+    let width = (goal1.points == 0) ? (rightEdge - PG_X) : 100;
+    return [rightEdge, width];
+}
+
 let formerNextGoalIndex = 0;
 
 function updateBar(amount) {
     let ngIndex = nextGoalIndex(amount);
     console.log(`next goal index = ${ngIndex}`);
     let nextGoal = goals[ngIndex];
-    let prevGoal = (ngIndex == 0) ? {points: 0, name: "Start!"} : goals[ngIndex-1];
-    
-    // Coordinate system in terms of bar percentages.
-    const PG_X = 20;
-    const NG_X = 90;
+    let prevGoal = getPreviousGoal(ngIndex);
     
     console.log(`bracket: ${prevGoal.points} - ${nextGoal.points}`);
-    
-    let rightEdge = PG_X + (amount-prevGoal.points) / (nextGoal.points - prevGoal.points) * (NG_X-PG_X);
-    let width = (ngIndex == 0) ? (rightEdge - PG_X) : 100;
+
+    let [rightEdge, width] = barParameters(prevGoal, nextGoal, amount);
     console.log(`progress bar: ${rightEdge}`);
     $("#bar").css('right', `${100 - rightEdge}%`);
     $("#bar").css('width', width + "%");
@@ -93,11 +102,14 @@ function updateBar(amount) {
     // If we're actually moving to a new goal, then
     // trigger the animation of the goalposts.
     if (ngIndex != formerNextGoalIndex) {
+        console.log('Triggering animation');
         $("#goal_1").replaceWith($("#goal_1").clone());
         $("#goal_2").replaceWith($("#goal_2").clone());
         if (formerNextGoalIndex == 0) {
             $("#bar").replaceWith($("#bar").clone().addClass("goal_reached"));
         }
+
+        
         console.log('Triggered animation');
     }
     formerNextGoalIndex = ngIndex;
