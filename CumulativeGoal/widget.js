@@ -71,14 +71,9 @@ function getPreviousGoal(goalIndex) {
     return (goalIndex == 0) ? {points: 0, name: "Start!"} : goals[goalIndex-1];
 }
 
-function barParameters(goal1, goal2, amount) {
-    // Coordinate system in terms of bar percentages.
-    const PG_X = 20;
-    const NG_X = 90;
-    let rightEdge = PG_X + (amount-goal1.points) / (goal2.points - goal1.points) * (NG_X-PG_X);
-    let width = (goal1.points == 0) ? (rightEdge - PG_X) : 100;
-    return [rightEdge, width];
-}
+const GOAL_WIDTH = 70;
+const GOAL_LMARGIN = 20;
+const GOAL_RMARGIN = GOAL_LMARGIN+GOAL_WIDTH;
 
 let formerNextGoalIndex = 0;
 
@@ -90,27 +85,25 @@ function updateBar(amount) {
     
     console.log(`bracket: ${prevGoal.points} - ${nextGoal.points}`);
 
-    let [rightEdge, width] = barParameters(prevGoal, nextGoal, amount);
-    console.log(`progress bar: ${rightEdge}`);
-    $("#bar").css('right', `${100 - rightEdge}%`);
-    $("#bar").css('width', width + "%");
     $("#points").html(Math.floor(amount));
-    
-    $("#goal_1").text(prevGoal.name);
-    $("#goal_2").text(nextGoal.name);
+
+    // Lazy-populate the goal bar labels.
+    $(`#goal_${ngIndex}`).text(nextGoal.name);
+    if (ngIndex > 0) {
+        $(`#goal_${ngIndex-1}`).text(prevGoal.name);
+    }
+
+    let pctWidth = GOAL_WIDTH * (ngIndex + ( (amount-prevGoal.points) / (nextGoal.points - prevGoal.points)));
+    // Update the progress bar width
+    $("#bar").css('width', pctWidth + "%");
 
     // If we're actually moving to a new goal, then
     // trigger the animation of the goalposts.
     if (ngIndex != formerNextGoalIndex) {
         console.log('Triggering animation');
-        $("#goal_1").replaceWith($("#goal_1").clone());
-        $("#goal_2").replaceWith($("#goal_2").clone());
-        if (formerNextGoalIndex == 0) {
-            $("#bar").replaceWith($("#bar").clone().addClass("goal_reached"));
-        }
-
-        
-        console.log('Triggered animation');
+        let origin = -(GOAL_WIDTH * ngIndex);
+        $("#goalContainer").css("left", `${origin}%`);
+        console.log(`Triggered animation to move origin to ${origin}`);
     }
     formerNextGoalIndex = ngIndex;
 }
