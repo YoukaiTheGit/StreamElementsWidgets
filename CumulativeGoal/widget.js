@@ -76,6 +76,7 @@ const GOAL_LMARGIN = 20;
 const GOAL_RMARGIN = GOAL_LMARGIN+GOAL_WIDTH;
 
 let formerNextGoalIndex = 0;
+let formerAmount = 0;
 
 function updateBar(amount) {
     let ngIndex = nextGoalIndex(amount);
@@ -95,15 +96,29 @@ function updateBar(amount) {
 
     let pctWidth = GOAL_WIDTH * (ngIndex + ( (amount-prevGoal.points) / (nextGoal.points - prevGoal.points)));
     // Update the progress bar width
-    $("#bar").css('width', pctWidth + "%");
+    // Animate it if it has changed
+    if (formerAmount != amount) {
+        $("#bar").animate({
+            width: `${pctWidth}%`
+        }, 2000);
+    }
+    // $("#bar").css('width', `${pctWidth}%`);
+    formerAmount = amount;
 
     // If we're actually moving to a new goal, then
     // trigger the animation of the goalposts.
     if (ngIndex != formerNextGoalIndex) {
         console.log('Triggering animation');
         let origin = -(GOAL_WIDTH * ngIndex);
-        $("#goalContainer").css("left", `${origin}%`);
+        // $("#goalContainer").css("left", `${origin}%`);
+        $("#goalContainer").animate({left: `${origin}%`}, 2000);
         console.log(`Triggered animation to move origin to ${origin}`);
+
+        $("#firework").css('left', `${GOAL_WIDTH * ngIndex + 5}%`); // .css('opacity', 1);
+        $("#firework").show();
+        setTimeout(() => {$("#firework").hide();}, 7000);
+        // .delay(5000).hide(); /* .animate({opacity: 0}, 1000).delay(1000) */
+        
     }
     formerNextGoalIndex = ngIndex;
 }
