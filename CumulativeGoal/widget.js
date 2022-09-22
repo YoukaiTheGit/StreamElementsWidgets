@@ -114,7 +114,7 @@ function updateBar(amount) {
         $("#goalContainer").animate({left: `${origin}%`}, 2000);
         console.log(`Triggered animation to move origin to ${origin}`);
 
-        $("#firework").css('left', `${GOAL_WIDTH * ngIndex + 5}%`); // .css('opacity', 1);
+        $("#firework").css('left', `${GOAL_WIDTH * ngIndex + GOAL_LMARGIN}%`); // .css('opacity', 1);
         $("#firework").show();
         setTimeout(() => {$("#firework").hide();}, 7000);
         // .delay(5000).hide(); /* .animate({opacity: 0}, 1000).delay(1000) */
