@@ -79,6 +79,12 @@ span.goal {
     font-weight:1200;
 }
 
+.goalPoints {
+    position: absolute;
+    left: 100%;
+    padding-left: 0.25em;
+}
+
 #goal_start {
 }
 
