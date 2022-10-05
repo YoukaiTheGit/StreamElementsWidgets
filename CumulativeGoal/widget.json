@@ -1,9 +1,4 @@
 {
-  "goal": {
-    "type": "number",
-    "label": "Points goal",
-    "value": 100
-  },
   "goals": {
     "type": "text",
     "label": "Points goals",

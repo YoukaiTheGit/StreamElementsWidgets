@@ -12,7 +12,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     // Parse the semicolon-delimited list of POINTS:GOALNAME pairs
     fieldData = obj.detail.fieldData;
     let maxPoints = 0;
-    goals = fieldData["goals"].split(/;/)
+    goals = fieldData.goals.split(/;/)
         .concat(["0:To Infinity And Beyond!"])
         .map((pair, index) => {
             let p = pair.split(/:/);
