@@ -48,6 +48,12 @@
     "value": 100,
     "group": "Appearance"
   },
+  "barBorder": {
+    "type": "number",
+    "label": "Bar borders width",
+    "value": 5,
+    "group": "Appearance"
+  },
   "fontName": {
     "type": "text",
     "label": "Font Name",

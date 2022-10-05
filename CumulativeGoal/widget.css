@@ -16,9 +16,8 @@
     left: 0px;
     z-index:-1;
     background: {{backgroundColor}};
-    border-top: solid {{borderColor}} 5px;
-    border-bottom: solid {{borderColor}} 5px;
-    border-left: solid {{borderColor}} 5px;
+    border-top: solid {{borderColor}} {{barBorder}}px;
+    border-bottom: solid {{borderColor}} {{barBorder}}px;
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
     border-radius: 0px;
@@ -68,7 +67,7 @@
     box-sizing: border-box;
     width: 70%;
     height: 100%;
-    border-right: solid {{borderColor}} 10px;
+    border-right: solid {{borderColor}} {{barBorder}}px;
     padding-right: 0.25em;
     text-align: right;
     vertical-align: middle;
