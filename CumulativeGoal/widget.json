@@ -118,18 +118,22 @@
 
   "widgetName": {
     "type": "hidden",
-    "value": "Cumulative Goal"
+    "value": "Cumulative Multigoal Progress Bar",
+    "group": "Appearance"
   },
   "widgetAuthor": {
     "type": "hidden",
-    "value": "lx"
+    "value": "WhazzItToYa and lx",
+    "group": "Appearance"
   },
   "widgetVersion": {
     "type": "hidden",
-    "value": "1.0"
+    "value": "1.0",
+    "group": "Appearance"
   },
   "widgetUpdateUrl": {
     "type": "hidden",
-    "value": "https://github.com/StreamElements/widgets/blob/master/CumulativeGoal/"
+    "value": "https://github.com/StreamElements/widgets/blob/master/CumulativeMultiGoal/",
+    "group": "Appearance"
   }
 }
