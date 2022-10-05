@@ -2,27 +2,17 @@
     font-family: '{{fontName}}', sans-serif;
 }
 
-#firework {
-    height: 300%;
-    position: absolute;
-    top: -270%;
-    transform: translate(-50%, 0);
+#main-container {
+    overflow: visible;
+    margin: 1em;
 }
 
-.fireworkSpacer {
-    position: absolute;
-    width: 100%;
-    height: 80%;
-    top: 0px;
-    left: 0px;
-}
-
-.meter {
+#meter {
     box-sizing: border-box;
     width: 100%;
-    height: 20%;
+    height: {{barHeight}}px;
     position: absolute;
-    top: 80%;
+    bottom: 0px;
     left: 0px;
     z-index:-1;
     background: {{backgroundColor}};
@@ -36,6 +26,13 @@
     box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
 }
 
+#firework {
+    height: {{celebrationHeight}}px;
+    position: absolute;
+    bottom: 100%;
+    transform: translate(-50%, 0);
+}
+
 .goalContainer {
     width: 100%;
     height: 100%;
@@ -44,6 +41,7 @@
     left: 0px;
     border: 0px;
     padding: 0px;
+    overflow: visible;
 }
 
 .goalContainer > span {
@@ -55,7 +53,8 @@
     overflow: hidden;
 }
 
-span.progress {
+.progress {
+    height: 100%;
     left: 20%;
     background-image: linear-gradient({{barColor1}}, {{barColor2}});
     background-repeat: repeat-x;
@@ -66,9 +65,10 @@ span.progress {
         inset 0 -2px 6px rgba(0,0,0,0.4);
 }
 
-span.goal {
+.goal {
     box-sizing: border-box;
     width: 70%;
+    height: 100%;
     border-right: solid {{borderColor}} 10px;
     padding-right: 0.25em;
     text-align: right;

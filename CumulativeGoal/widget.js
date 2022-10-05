@@ -139,14 +139,23 @@ function versionedUpdateBar(ver, amount) {
     // trigger the animation of the goalposts.
     if (ngIndex != formerNextGoalIndex) {
         console.log('Triggering animation');
+
+        // Slide the bar so the new goal is in view
         let origin = -(GOAL_WIDTH * ngIndex);
         // $("#goalContainer").css("left", `${origin}%`);
         $("#goalContainer").animate({left: `${origin}%`}, 2000);
         console.log(`Triggered animation to move origin to ${origin}`);
-        
+
+        // Show the celebration animation
         $("#firework").css('left', `${GOAL_WIDTH * ngIndex + GOAL_LMARGIN}%`); // .css('opacity', 1);
         $("#firework").show();
+
+        // And play the celebration sound
+        let audio = $("#audio")[0];
+        audio.play();
+
         setTimeout(() => {$("#firework").hide();}, 7000);
+        // Why doesn't this animation work?
         // .delay(5000).hide(); /* .animate({opacity: 0}, 1000).delay(1000) */
         
     }

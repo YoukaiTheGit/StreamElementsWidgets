@@ -1,10 +1,11 @@
 <link href="https://fonts.googleapis.com/css?family={{fontName}}:400,700" rel="stylesheet">
-<div class="main-container">
-  <div class="fireworkSpacer">
-  </div>
-  <div class="meter">
+<div id="main-container">
+  <audio id="audio">
+    <source id="audioSource" src="{{celebrationSound}}"></source>
+  </audio>
+  <div id="meter">
     <div id="goalContainer" class="goalContainer">
-      <img id="firework" src="http://tsukamori.net/firework.gif" style="display:none"/>
+      <img id="firework" src="{{celebrationImage}}" style="display:none"/>
       <span id="bar" class="progress">
         <span id="points" class="legend">0</span>
       </span>

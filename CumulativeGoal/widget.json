@@ -2,78 +2,120 @@
   "goals": {
     "type": "text",
     "label": "Points goals",
-      "value": "10:Tweet;25:Whipped Cream;50:Duolingo;75:Butts!;100:Lore;125:Q&A;150:Dog Food;175:Crane Game;200:Twister;250:Hot Tub;300:Spice;350:Cosplay;400:Alien;450:Boy Smell;500:Art;600:Fanfic ASMR;700:Chicken Nuggets;800:Chibi Model;900:Bad Dragon;1000:+24 Hours"
+    "value": "10:First Goal;25:Second Goal;50:Third Goal;75:Etc",
+    "group": "Goal Settings"
   },
   "pointsPerFollow": {
     "type": "number",
     "label": "Points per Follow",
-    "value": 0
+    "value": 0,
+    "group": "Goal Settings"
   },
   "pointsPerSub": {
     "type": "number",
     "label": "Points per sub",
-    "value": 1
+    "value": 1,
+    "group": "Goal Settings"
   },
   "pointsPerTip": {
     "type": "number",
     "label": "Points per 1 currency",
-    "value": 0.2
+    "value": 0.2,
+    "group": "Goal Settings"
   },
   "pointsPerBit": {
     "type": "number",
     "label": "Points per 100 Bits",
-    "value": 0.2
+    "value": 0.2,
+    "group": "Goal Settings"
   },
   "pointsPerCounter": {
     "type": "number",
     "label": "Points per counter amount",
-    "value": 0
+    "value": 0,
+    "group": "Goal Settings"
   },
   "botCounterName": {
     "type": "text",
     "label": "Bot counter name",
-    "value": "botpoints"
+    "value": "botpoints",
+    "group": "Goal Settings"
+  },
+
+  "barHeight": {
+    "type": "number",
+    "label": "Bar height",
+    "value": 100,
+    "group": "Appearance"
   },
   "fontName": {
     "type": "text",
     "label": "Font Name",
-    "value": "Roboto"
+    "value": "Roboto",
+    "group": "Appearance"
   },
   "backgroundColor": {
     "type": "colorpicker",
     "label": "Background color",
-    "value": "rgb(255, 167, 246)"
+    "value": "rgb(255, 167, 246)",
+    "group": "Appearance"
   },
   "borderColor": {
     "type": "colorpicker",
     "label": "Outline color",
-    "value": "rgb(214, 0, 0)"
+    "value": "rgb(214, 0, 0)",
+    "group": "Appearance"
   },
   "barColor1": {
     "type": "colorpicker",
     "label": "Bar color",
-    "value": "rgb(254, 191, 191)"
+    "value": "rgb(254, 191, 191)",
+    "group": "Appearance"
   },
   "barColor2": {
     "type": "colorpicker",
     "label": "Bar color 2",
-    "value": "hsl(57, 100%, 71%)"
+    "value": "hsl(57, 100%, 71%)",
+    "group": "Appearance"
   },
   "labelColor": {
     "type": "colorpicker",
     "label": "Label font color",
-    "value": "rgb(143, 0, 0)"
+    "value": "rgb(143, 0, 0)",
+    "group": "Appearance"
   },
   "labelSize": {
     "type": "number",
     "label": "Label font Size",
-    "value": 45
+    "value": 45,
+    "group": "Appearance"
   },
   "labelStroke": {
     "type": "number",
     "label": "Label stroke size",
-    "value": 1
+    "value": 1,
+    "group": "Appearance"
   },
+  
+  "celebrationImage": {
+    "type": "image-input",
+    "label": "Celebration image to display when a goal has been passed",
+    "value":"http://tsukamori.net/firework.gif",
+    "group": "Appearance"
+  },
+  "celebrationHeight": {
+    "type": "number",
+    "label": "Height of celebration image",
+    "value": 200,
+    "group": "Appearance"
+  },
+  "celebrationSound": {
+    "type": "sound-input",
+    "label": "Sound to play when a goal has been passed",
+    "value":"https://tsukamori.net/firework.mp3",
+    "group": "Appearance"
+  },
+
   "widgetName": {
     "type": "hidden",
     "value": "Cumulative Goal"
