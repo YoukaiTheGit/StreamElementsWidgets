@@ -99,10 +99,9 @@ let currentTargetVersion = 0;
 function updateBar(amount) {
     // Batch up multiple updates (e.g., many gift subs) and only
     // process the last one.
-    currentTargetVersion++;
-    let newVersion = currentTargetVersion;
+    let newVersion = ++currentTargetVersion;
     setTimeout(function() {versionedUpdateBar(newVersion, amount);},
-               2000);
+               (currentTargetVersion > 1) ? 2000 : 1);
 }
 
 const GOAL_WIDTH = 70;
@@ -113,6 +112,7 @@ let formerNextGoalIndex = 0;
 let formerAmount = 0;
 
 function versionedUpdateBar(ver, amount) {
+    console.log(`versionedUpdate ${ver} ${amount}`);
     if (ver != currentTargetVersion) return; // More updates on the way
     
     let ngIndex = nextGoalIndex(amount);
@@ -130,7 +130,7 @@ function versionedUpdateBar(ver, amount) {
     if (formerAmount != amount) {
         $("#bar").animate({
             width: `${pctWidth}%`
-        }, 2000);
+        }, (ver > 1) ? 2000 : 0);
     }
     // $("#bar").css('width', `${pctWidth}%`);
     formerAmount = amount;
@@ -138,25 +138,33 @@ function versionedUpdateBar(ver, amount) {
     // If we're actually moving to a new goal, then
     // trigger the animation of the goalposts.
     if (ngIndex != formerNextGoalIndex) {
-        console.log('Triggering animation');
+        console.log(`Triggering animation for new index ${ngIndex} (was ${formerNextGoalIndex})`);
 
         // Slide the bar so the new goal is in view
-        let origin = -(GOAL_WIDTH * ngIndex);
-        // $("#goalContainer").css("left", `${origin}%`);
-        $("#goalContainer").animate({left: `${origin}%`}, 2000);
+        let origin = `${-(GOAL_WIDTH * ngIndex)}%`;
         console.log(`Triggered animation to move origin to ${origin}`);
 
-        // Show the celebration animation
-        $("#firework").css('left', `${GOAL_WIDTH * ngIndex + GOAL_LMARGIN}%`); // .css('opacity', 1);
-        $("#firework").show();
+        // The first update is just after the page loads.  Don't animate, just
+        // jump right to it.
+        if (ver > 1) {
+            $("#goalContainer").animate({left: origin}, 2000);
 
-        // And play the celebration sound
-        let audio = $("#audio")[0];
-        audio.play();
+            if (ngIndex > formerNextGoalIndex) {
+                // Show the celebration animation
+                $("#firework").css('left', `${GOAL_WIDTH * ngIndex + GOAL_LMARGIN}%`); // .css('opacity', 1);
+                $("#firework").show();
+                
+                // And play the celebration sound
+                let audio = $("#audio")[0];
+                audio.play();
 
-        setTimeout(() => {$("#firework").hide();}, 7000);
-        // Why doesn't this animation work?
-        // .delay(5000).hide(); /* .animate({opacity: 0}, 1000).delay(1000) */
+                setTimeout(() => {$("#firework").hide();}, 7000);
+                // Why doesn't this animation work?
+                // .delay(5000).hide(); /* .animate({opacity: 0}, 1000).delay(1000) */
+            }
+        } else {
+            $("#goalContainer").css("left", origin);
+        }
         
     }
     formerNextGoalIndex = ngIndex;
