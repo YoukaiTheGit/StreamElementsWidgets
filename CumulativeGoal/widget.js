@@ -22,14 +22,11 @@ window.addEventListener('onWidgetLoad', function (obj) {
                 .css("left", `${20+70*index}%`);
 
             pts = Number(p[0]);
-            /* Don't know why this doesn't work.
-            let n = $(g).find(".goalName");
-            console.log(`found goal name: ${n.get(0)}`);
-            n.text(p[1]);
-            $(".goalPoints",$(g)).text(pts);
-            */
-            g.text(p[1]);
-            
+
+            // I would have liked these to be elements already in the template, that I populate
+            // with the contents.  But it wasn't working with jquery.
+            g.append($('<span class="goalName">').text(p[1]));
+            g.append($('<span class="goalPoints">').text(pts));
             goalContainer.append(g);
             g.show();
 
