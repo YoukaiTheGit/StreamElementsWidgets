@@ -74,7 +74,7 @@
     white-space: nowrap;
     font-size:{{labelSize}}px;
     color:{{labelColor}};
-    font-weight:1200;
+    font-weight:900;
     overflow: visible;
 }
 
@@ -96,5 +96,5 @@
     font-size:{{labelSize}}px;
     color:{{labelColor}};
     text-align:center;
-    font-weight:1200;
+    font-weight:900;
 }
