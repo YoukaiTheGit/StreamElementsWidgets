@@ -36,7 +36,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
         });
     sessionData = obj["detail"]["session"]["data"];
     SE_API.counters.get(fieldData.botCounterName).then(counter => {
-        botPoints = parseInt(counter.value);
+        botPoints = parseBotPoints(counter.value);
         analysePoints();
     });
 });
@@ -50,10 +50,15 @@ window.addEventListener('onEventReceived', function (obj) {
     const listener = obj.detail.listener;
     const data = obj.detail.event;
     if (listener === 'bot:counter' && data.counter === fieldData.botCounterName) {
-        botPoints = parseInt(data.value);
+        botPoints = parseBotPoints(data.value);
         analysePoints();
     }
 });
+
+function parseBotPoints(value) {
+    let i = parseInt(value, 10);
+    return isNaN(i) ? 0 : i;
+}
 
 
 function analysePoints() {
@@ -67,6 +72,7 @@ function analysePoints() {
     currentPoints += bitsAmount * fieldData.pointsPerBit / 100;
     currentPoints += followerAmount * fieldData.pointsPerFollow;
     currentPoints += botPoints * fieldData.pointsPerCounter;
+    console.log(`${subsAmount} ${tipsAmount} ${bitsAmount} ${followerAmount} ${botPoints}`);
     updateBar(currentPoints);
 }
 
@@ -96,12 +102,27 @@ function getPreviousGoal(goalIndex) {
 
 let currentTargetVersion = 0;
 
+
+let latestAmount = 0;
+let currentAmount = 0;
+let updateTimer = null;
+let firstTime = true;
+
 function updateBar(amount) {
-    // Batch up multiple updates (e.g., many gift subs) and only
-    // process the last one.
-    let newVersion = ++currentTargetVersion;
-    setTimeout(function() {versionedUpdateBar(newVersion, amount);},
-               (currentTargetVersion > 1) ? 2000 : 1);
+  console.log(`${Date.now()}: requested update to ${amount}`);
+  latestAmount = amount;
+  
+  if (updateTimer === null) {
+      updateTimer = setTimeout(() => {
+          updateTimer = null;
+   	  if (latestAmount != currentAmount) {
+      	      console.log(`${Date.now()}: updating to ${latestAmount}`);      
+      	      realUpdateBar(latestAmount, firstTime);
+      	      currentAmount = latestAmount;
+    	  }
+      }, firstTime ? 0 : 2100);
+      firstTime = false;
+  }
 }
 
 const GOAL_WIDTH = 70;
@@ -111,10 +132,8 @@ const GOAL_RMARGIN = GOAL_LMARGIN+GOAL_WIDTH;
 let formerNextGoalIndex = 0;
 let formerAmount = 0;
 
-function versionedUpdateBar(ver, amount) {
-    console.log(`versionedUpdate ${ver} ${amount}`);
-    if (ver != currentTargetVersion) return; // More updates on the way
-    
+
+function realUpdateBar(amount, firstTime) {
     let ngIndex = nextGoalIndex(amount);
     console.log(`next goal index = ${ngIndex}`);
     let nextGoal = goals[ngIndex];
@@ -130,7 +149,7 @@ function versionedUpdateBar(ver, amount) {
     if (formerAmount != amount) {
         $("#bar").animate({
             width: `${pctWidth}%`
-        }, (ver > 1) ? 2000 : 0);
+        }, firstTime ? 0 : 2000);
     }
     // $("#bar").css('width', `${pctWidth}%`);
     formerAmount = amount;
@@ -146,7 +165,7 @@ function versionedUpdateBar(ver, amount) {
 
         // The first update is just after the page loads.  Don't animate, just
         // jump right to it.
-        if (ver > 1) {
+        if (!firstTime) {
             $("#goalContainer").animate({left: origin}, 2000);
 
             if (ngIndex > formerNextGoalIndex) {
